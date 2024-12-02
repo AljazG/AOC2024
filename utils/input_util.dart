@@ -42,4 +42,21 @@ class Input {
   List<String> getByRegex(RegExp regex) {
     return _inputString.split(regex);
   }
+
+  List<List<int>> getIntGrid() {
+    return getIntGridByPattern(' ');
+  }
+
+  List<List<int>> getIntGridByPattern(String pattern) {
+    int rows = _inputList.length;
+
+    List<List<int>> grid = [];
+
+    for (int i = 0; i < rows; i++) {
+      List<int> row = _inputList[i].split(' ').map(int.parse).toList();
+      grid.add(row);
+    }
+
+    return grid;
+  }
 }

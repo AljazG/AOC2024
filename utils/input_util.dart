@@ -29,6 +29,8 @@ class Input {
     return File(input).readAsLinesSync();
   }
 
+  String getString() => _inputString;
+
   List<String> getList() => _inputList;
 
   List<String> getPerWhitespace() {

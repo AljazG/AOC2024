@@ -1,10 +1,11 @@
 import 'model/advent_problem.dart';
 import 'solutions/day01.dart';
 import 'solutions/day02.dart';
+import 'solutions/day03.dart';
 
 bool showLatest = true;
 
-final days = <AdventProblem>[Day01(), Day02()];
+final days = <AdventProblem>[Day01(), Day02(), Day03()];
 
 void checkArgs(List<String?> args) {
   for (var arg in args) {

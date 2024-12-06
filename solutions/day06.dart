@@ -13,6 +13,8 @@ class Day06 extends AdventProblem {
   static final int UP = 2;
   static final int DOWN = 3;
 
+  var positions = Set<(int, int, int)>();
+
   GuardStance getGuardStance(List<List<String>> grid) {
     for (int i = 0; i < grid.length; i++) {
       for (int j = 0; j < grid[i].length; j++) {
@@ -93,8 +95,7 @@ class Day06 extends AdventProblem {
     return false;
   }
 
-  bool isLoop(GuardStance stance, List<List<String>> grid,
-      Set<(int, int, int)> positions) {
+  bool isLoop(GuardStance stance, List<List<String>> grid) {
     int i, j;
     (i, j) = stance.$1;
     int direction = stance.$2;
@@ -114,9 +115,15 @@ class Day06 extends AdventProblem {
         return false;
       }
       if (grid[i][j - 1] == '#') {
-        return isLoop(((i, j), UP), grid, positions);
+        return isLoop(
+          ((i, j), UP),
+          grid,
+        );
       } else {
-        return isLoop(((i, j - 1), direction), grid, positions);
+        return isLoop(
+          ((i, j - 1), direction),
+          grid,
+        );
       }
     }
 
@@ -125,9 +132,15 @@ class Day06 extends AdventProblem {
         return false;
       }
       if (grid[i][j + 1] == '#') {
-        return isLoop(((i, j), DOWN), grid, positions);
+        return isLoop(
+          ((i, j), DOWN),
+          grid,
+        );
       } else {
-        return isLoop(((i, j + 1), direction), grid, positions);
+        return isLoop(
+          ((i, j + 1), direction),
+          grid,
+        );
       }
     }
 
@@ -136,9 +149,15 @@ class Day06 extends AdventProblem {
         return false;
       }
       if (grid[i - 1][j] == '#') {
-        return isLoop(((i, j), RIGHT), grid, positions);
+        return isLoop(
+          ((i, j), RIGHT),
+          grid,
+        );
       } else {
-        return isLoop(((i - 1, j), direction), grid, positions);
+        return isLoop(
+          ((i - 1, j), direction),
+          grid,
+        );
       }
     }
 
@@ -147,9 +166,15 @@ class Day06 extends AdventProblem {
         return false;
       }
       if (grid[i + 1][j] == '#') {
-        return isLoop(((i, j), LEFT), grid, positions);
+        return isLoop(
+          ((i, j), LEFT),
+          grid,
+        );
       } else {
-        return isLoop(((i + 1, j), direction), grid, positions);
+        return isLoop(
+          ((i + 1, j), direction),
+          grid,
+        );
       }
     }
 
@@ -175,7 +200,7 @@ class Day06 extends AdventProblem {
   @override
   int solvePart2() {
     var grid = input.getCharacterGrid();
-    var positions;
+
     GuardStance guard = getGuardStance(grid);
     fillGrid(guard, grid);
     int counter = 0;
@@ -183,10 +208,10 @@ class Day06 extends AdventProblem {
     for (int i = 0; i < grid.length; i++) {
       for (int j = 0; j < grid[i].length; j++) {
         if ((i != guard.$1.$1 || j != guard.$1.$2) && grid[i][j] == 'X') {
-          positions = Set<(int, int, int)>();
           var before = grid[i][j];
           grid[i][j] = '#';
-          if (isLoop(guard, grid, positions)) {
+          positions = Set<(int, int, int)>();
+          if (isLoop(guard, grid)) {
             counter++;
           }
           grid[i][j] = before;

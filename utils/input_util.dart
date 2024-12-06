@@ -49,6 +49,15 @@ class Input {
     return getIntGridByPattern(' ');
   }
 
+  List<List<String>> getCharacterGrid() {
+    var list = _inputList;
+    var grid = List.generate(
+      list.length,
+      (i) => List.generate(list[0].length, (j) => list[i][j]),
+    );
+    return grid;
+  }
+
   List<List<int>> getIntGridByPattern(String pattern) {
     int rows = _inputList.length;
 
@@ -60,5 +69,17 @@ class Input {
     }
 
     return grid;
+  }
+
+  static void printCharacterGrid(List<List<String>> grid) {
+    for (List<String> row in grid) {
+      for (int i = 0; i < row.length; i++) {
+        stdout.write(row[i]);
+        if (i < row.length - 1) {
+          stdout.write(" ");
+        }
+      }
+      stdout.write("\n");
+    }
   }
 }

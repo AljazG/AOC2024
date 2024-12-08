@@ -5,6 +5,7 @@ import 'solutions/day03.dart';
 import 'solutions/day04.dart';
 import 'solutions/day05.dart';
 import 'solutions/day06.dart';
+import 'solutions/day07.dart';
 
 bool showLatest = true;
 
@@ -14,7 +15,8 @@ final days = <AdventProblem>[
   Day03(),
   Day04(),
   Day05(),
-  Day06()
+  Day06(),
+  Day07()
 ];
 
 void checkArgs(List<String?> args) {

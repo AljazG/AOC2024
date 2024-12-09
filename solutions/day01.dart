@@ -20,9 +20,7 @@ class Day01 extends AdventProblem {
   List<Pair> constructPairList(List<int> first, List<int> second) {
     List<int> a = [...first];
     List<int> b = [...second];
-
     List<Pair> pairList = [];
-
     for (int i = 0; i < first.length; i++) {
       var smallestAIdx =
           a.asMap().entries.reduce((a, b) => a.value < b.value ? a : b).key;
@@ -32,7 +30,6 @@ class Day01 extends AdventProblem {
       a.removeAt(smallestAIdx);
       b.removeAt(smallestBIdx);
     }
-
     return pairList;
   }
 

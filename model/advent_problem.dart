@@ -17,7 +17,6 @@ abstract class AdventProblem {
   void printSolution() {
     SolutionWithTime part1 = _solveAndTime(solvePart1);
     SolutionWithTime part2 = _solveAndTime(solvePart2);
-
     print('-------------------------');
     print('         Day $dayNum        ');
     print('Solution for part one: ${_formatResult(part1)}');

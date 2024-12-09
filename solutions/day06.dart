@@ -1,5 +1,4 @@
 import '../model/advent_problem.dart';
-import '../utils/input_util.dart';
 
 typedef GuardStance = (Coords, int);
 typedef Coords = (int, int);

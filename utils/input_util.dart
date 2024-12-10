@@ -64,7 +64,7 @@ class Input {
     List<List<int>> grid = [];
 
     for (int i = 0; i < rows; i++) {
-      List<int> row = _inputList[i].split(' ').map(int.parse).toList();
+      List<int> row = _inputList[i].split(pattern).map(int.parse).toList();
       grid.add(row);
     }
 

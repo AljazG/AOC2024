@@ -26,92 +26,78 @@ class Day07 extends AdventProblem {
     }
   }
 
-  bool isValid(
-      List<int> numbers, List<int> operators, int goal, int operatorIdx) {
-    int sum = 0;
-    for (int i = 1; i < numbers.length; i++) {
-      if (operators[i - 1] == MUL) {
-        if (sum == 0) {
-          sum = numbers[i - 1] * numbers[i];
-        } else {
-          sum *= numbers[i];
-        }
-      } else if (operators[i - 1] == PLUS) {
-        if (i == 1) {
-          sum = (numbers[i - 1] + numbers[i]);
-        } else {
-          sum = sum + numbers[i];
-        }
-      } 
+  bool isValid(List<int> numbers, int goal, int i, int sum) {
+    if (sum > goal) {
+      return false;
     }
 
-    if (sum == goal) {
+    if (sum == goal && i + 1 == numbers.length) {
       return true;
     }
 
-    if (operatorIdx >= operators.length) {
+    if (i + 1 >= numbers.length) {
       return false;
     }
 
-    if (areAllOpsMul(operators)) {
-      return false;
+    int mul = 0;
+    int plus = 0;
+
+    if (i == 0) {
+      mul = numbers[i] * numbers[i + 1];
+      plus = (numbers[i] + numbers[i + 1]);
+    } else {
+      mul = sum * numbers[i + 1];
+      plus = sum + numbers[i + 1];
     }
 
-    operators[operatorIdx] = MUL;
-    bool path1 = isValid(numbers, operators, goal, operatorIdx + 1);
+    if (isValid(numbers, goal, i + 1, plus)) {
+      return true;
+    }
+    if (isValid(numbers, goal, i + 1, mul)) {
+      return true;
+    }
 
-    operators[operatorIdx] = PLUS;
-    bool path2 = isValid(numbers, operators, goal, operatorIdx + 1);
-
-    return path1 || path2;
+    return false;
   }
 
-  bool isValidP2(
-      List<int> numbers, List<int> operators, int goal, int operatorIdx) {
-    int sum = 0;
-    for (int i = 1; i < numbers.length; i++) {
-      if (operators[i - 1] == MUL) {
-        if (sum == 0) {
-          sum = numbers[i - 1] * numbers[i];
-        } else {
-          sum *= numbers[i];
-        }
-      } else if (operators[i - 1] == PLUS) {
-        if (i == 1) {
-          sum = (numbers[i - 1] + numbers[i]);
-        } else {
-          sum = sum + numbers[i];
-        }
-      } else if (operators[i - 1] == OR) {
-        if (i == 1) {
-          sum = int.parse(numbers[i - 1].toString() + numbers[i].toString());
-        } else {
-          sum = int.parse(sum.toString() + numbers[i].toString());
-        }
-      }
-      
+  bool isValidP2(List<int> numbers, int goal, int i, int sum) {
+    if (sum > goal) {
+      return false;
     }
 
-    if (sum == goal) {
+    if (sum == goal && i + 1 == numbers.length) {
       return true;
     }
 
-    if (operatorIdx >= operators.length) {
+    if (i + 1 >= numbers.length) {
       return false;
     }
 
-    if (areAllOpsMul(operators)) {
-      return false;
+    int mul = 0;
+    int plus = 0;
+    int or = 0;
+
+    if (i == 0) {
+      mul = numbers[i] * numbers[i + 1];
+      plus = (numbers[i] + numbers[i + 1]);
+      or = int.parse(numbers[i].toString() + numbers[i + 1].toString());
+    } else {
+      mul = sum * numbers[i + 1];
+      plus = sum + numbers[i + 1];
+      or = int.parse(sum.toString() + numbers[i + 1].toString());
     }
 
-    operators[operatorIdx] = MUL;
-    bool path1 = isValidP2(numbers, operators, goal, operatorIdx + 1);
-    operators[operatorIdx] = OR;
-    bool path2 = isValidP2(numbers, operators, goal, operatorIdx + 1);
-    operators[operatorIdx] = PLUS;
-    bool path3 = isValidP2(numbers, operators, goal, operatorIdx + 1);
+    if (isValidP2(numbers, goal, i + 1, plus)) {
+      return true;
+    }
+    if (isValidP2(numbers, goal, i + 1, mul)) {
+      return true;
+    }
+    if (isValidP2(numbers, goal, i + 1, or)) {
+      return true;
+    }
 
-    return path1 || path2 || path3;
+    return false;
   }
 
   bool areAllOpsMul(List<int> ops) {
@@ -130,7 +116,7 @@ class Day07 extends AdventProblem {
     var validResults = [];
     for (int i = 0; i < results.length; i++) {
       var ops = List.generate(numbers[i].length - 1, (_) => PLUS);
-      if (isValid(numbers[i], ops, results[i], 0)) {
+      if (isValid(numbers[i], results[i], 0, 0)) {
         validResults.add(results[i]);
       }
     }
@@ -144,8 +130,7 @@ class Day07 extends AdventProblem {
     parseInput(lines);
     var validResults = [];
     for (int i = 0; i < results.length; i++) {
-      var ops = List.generate(numbers[i].length - 1, (_) => PLUS);
-      if (isValidP2(numbers[i], ops, results[i], 0)) {
+      if (isValidP2(numbers[i], results[i], 0, 0)) {
         validResults.add(results[i]);
       }
     }

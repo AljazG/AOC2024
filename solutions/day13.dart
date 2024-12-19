@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import '../model/advent_problem.dart';
 
 typedef Button = (int, int);
@@ -32,7 +30,7 @@ class Day13 extends AdventProblem {
       if (p2) {
         prizeX += 10000000000000;
         prizeY += 10000000000000;
-      } 
+      }
       contraptions.add(Contraption((
         int.parse(aSplit[2].split('+')[1].replaceFirst(",", "")),
         int.parse(aSplit[3].split('+')[1])
@@ -53,7 +51,7 @@ class Day13 extends AdventProblem {
     double xb = contraption.b.$1.toDouble();
     double yb = contraption.b.$2.toDouble();
     double xr = contraption.prize.$1.toDouble();
-    double yr = contraption.prize.$2.toDouble(); 
+    double yr = contraption.prize.$2.toDouble();
     double bTimes = (xa * yr - ya * xr) / (yb * xa - xb * ya);
     double aTimes = (xr - xb * bTimes) / xa;
     return (aTimes, bTimes);
@@ -61,30 +59,30 @@ class Day13 extends AdventProblem {
 
   @override
   int solvePart1() {
-   List<String> lines = input.getList();
+    List<String> lines = input.getList();
     List<Contraption> contraptions = parseInput(lines, false);
     int sum = 0;
     for (Contraption contraption in contraptions) {
-        double aTimes, bTimes;
-        (aTimes, bTimes) = solve(contraption);
-        if (aTimes.toInt() == aTimes && bTimes.toInt() == bTimes) {
-          sum += (aTimes.toInt() * 3 + bTimes.toInt());
-        }
+      double aTimes, bTimes;
+      (aTimes, bTimes) = solve(contraption);
+      if (aTimes.toInt() == aTimes && bTimes.toInt() == bTimes) {
+        sum += (aTimes.toInt() * 3 + bTimes.toInt());
+      }
     }
     return sum;
   }
 
   @override
   int solvePart2() {
-     List<String> lines = input.getList();
+    List<String> lines = input.getList();
     List<Contraption> contraptions = parseInput(lines, true);
     int sum = 0;
     for (Contraption contraption in contraptions) {
-        double aTimes, bTimes;
-        (aTimes, bTimes) = solve(contraption);
-        if (aTimes.toInt() == aTimes && bTimes.toInt() == bTimes ) {
-          sum += (aTimes.toInt() * 3 + bTimes.toInt());
-        }
+      double aTimes, bTimes;
+      (aTimes, bTimes) = solve(contraption);
+      if (aTimes.toInt() == aTimes && bTimes.toInt() == bTimes) {
+        sum += (aTimes.toInt() * 3 + bTimes.toInt());
+      }
     }
     return sum;
   }

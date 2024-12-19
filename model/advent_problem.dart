@@ -36,3 +36,9 @@ abstract class AdventProblem {
     return '$solution - Took ${duration.inMilliseconds} milliseconds';
   }
 }
+
+extension strExtension on String {
+  String replaceAt(int id, String character) {
+    return this.substring(0, id) + character + this.substring(id + 1);
+  }
+}

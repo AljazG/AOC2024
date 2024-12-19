@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import '../model/advent_problem.dart';
 
 class Robot {

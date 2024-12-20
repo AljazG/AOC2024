@@ -70,28 +70,4 @@ class Input {
 
     return grid;
   }
-
-  static void printCharacterGrid(List<List<String>> grid) {
-    for (List<String> row in grid) {
-      for (int i = 0; i < row.length; i++) {
-        stdout.write(row[i]);
-        if (i < row.length - 1) {
-          stdout.write(" ");
-        }
-      }
-      stdout.write("\n");
-    }
-  }
-
-  static void printIntGrid(List<List<int>> grid) {
-    for (List<int> row in grid) {
-      for (int i = 0; i < row.length; i++) {
-        stdout.write(row[i]);
-        if (i < row.length - 1) {
-          stdout.write(" ");
-        }
-      }
-      stdout.write("\n");
-    }
-  }
 }

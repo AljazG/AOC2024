@@ -1,5 +1,3 @@
-import 'dart:io';
-
 void printCharacterGrid(List<List<String>> grid) {
   final buffer = StringBuffer();
   for (List<String> row in grid) {

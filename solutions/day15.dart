@@ -1,5 +1,4 @@
 import '../model/advent_problem.dart';
-import '../utils/input_util.dart';
 
 class Day15 extends AdventProblem {
   Day15() : super(15);

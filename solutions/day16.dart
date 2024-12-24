@@ -3,7 +3,6 @@ import 'dart:math';
 import '../model/advent_problem.dart';
 import '../utils/direction_utils.dart';
 import '../utils/general_utils.dart';
-import '../utils/grid_utils.dart';
 
 typedef GridAndPositions = (List<List<String>>, (int, int), (int, int));
 
@@ -216,14 +215,6 @@ class Day16 extends AdventProblem {
       }
     }
     return distances;
-  }
-
-  Map<(int, int), bool> getShortestPathSet(List<(int, int)> vertices) {
-    Map<(int, int), bool> spSet = Map();
-    for (var (i, j) in vertices) {
-      spSet[(i, j)] = false;
-    }
-    return spSet;
   }
 
   @override

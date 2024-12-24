@@ -78,8 +78,8 @@ class Day16 extends AdventProblem {
     return minScore;
   }
 
-  (int, int) minDistance(Map<(int, int), int> distances,
-      Map<(int, int), bool> spSet, Set<(int, int)> toExplore) {
+  (int, int) minDistance(
+      Map<(int, int), int> distances, Set<(int, int)> toExplore) {
     int min = MAX_INT;
     int iMin = 0;
     int jMin = 0;
@@ -87,7 +87,7 @@ class Day16 extends AdventProblem {
     for (var p in toExplore) {
       int i = p.$1;
       int j = p.$2;
-      if (spSet[(i, j)] == false && distances[(i, j)]! <= min) {
+      if (distances[(i, j)]! <= min) {
         min = distances[(i, j)]!;
         iMin = i;
         jMin = j;
@@ -144,7 +144,6 @@ class Day16 extends AdventProblem {
       int iStart, int jStart, int iEnd, int jEnd, List<int> direction) {
     List<(int, int)> vertices = getVertices();
     Map<(int, int), int> distances = getDistances(vertices);
-    Map<(int, int), bool> spSet = getShortestPathSet(vertices);
     Set<(int, int)> toExplore = Set();
     toExplore.add((iStart, jStart));
 
@@ -156,7 +155,7 @@ class Day16 extends AdventProblem {
     paths[(iStart, jStart)] = Set<(int, int)>.of({(iStart, jStart)});
 
     while (!toExplore.isEmpty) {
-      var (iV, jV) = minDistance(distances, spSet, toExplore);
+      var (iV, jV) = minDistance(distances, toExplore);
 
       var direction = directions[(iV, jV)]!;
       Set<(int, int)> pathsToV = paths[(iV, jV)]!;
